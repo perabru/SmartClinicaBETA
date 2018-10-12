@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 import smclb.com.brunopera.smartclinica_beta.R;
 import smclb.com.brunopera.smartclinica_beta.config.ConfiguracaoFirebase;
+import smclb.com.brunopera.smartclinica_beta.helper.Base64Custom;
 import smclb.com.brunopera.smartclinica_beta.model.Usuario;
 
 public class CadastroActivity extends AppCompatActivity {
@@ -85,6 +86,10 @@ public class CadastroActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
 
+
+                    String idUsuario = Base64Custom.codificarBase64(usuario.getEmail());
+                    usuario.setIdUsuario(idUsuario);
+                    usuario.salvar();
 
                     finish();
                    // Toast.makeText(CadastroActivity.this,"Sucesso ao cadastrar", Toast.LENGTH_SHORT).show();
