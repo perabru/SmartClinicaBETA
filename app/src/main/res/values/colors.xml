@@ -3,4 +3,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+
+
+
+    <!-- Cores do submenu -->
+    <color name="colorPrimaryMenuItem">#03d3f3</color>
+    <color name="colorPrimaryDarkMenuItem">#03d3f6</color>
+    <color name="colorAccentMenuItem">#03d3f9</color>
 </resources>
