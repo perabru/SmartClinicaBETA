@@ -23,7 +23,19 @@
         <activity
             android:name=".activity.PrincipalActivity"
             android:label="@string/title_activity_principal"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".model.Idade" />
+        <activity android:name=".model.DataNascimento" />
+        <activity android:name=".model.EstadoCivil" />
+        <activity android:name=".model.Endereco" />
+        <activity android:name=".model.Bairro" />
+        <activity android:name=".model.Cidade" />
+        <activity android:name=".model.CEP" />
+        <activity android:name=".model.Telefone" />
+        <activity android:name=".model.Celular" />
+        <activity android:name=".model.Profissao" />
+        <activity android:name=".model.Medicamentos" />
+        <activity android:name=".model.Orteses"></activity>
     </application>
 
 </manifest>

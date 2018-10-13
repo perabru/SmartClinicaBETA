@@ -12,6 +12,10 @@ public class Usuario {
     private String email;
     private String senha;
 
+
+
+
+
     public Usuario() {
 
     }
@@ -56,4 +60,5 @@ public class Usuario {
     public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
+
 }

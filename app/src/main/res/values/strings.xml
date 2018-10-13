@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Smart Clinica - BETA</string>
     <string name="title_activity_principal">PrincipalActivity</string>
+    <string name="title_activity_idade">IdadeActivity</string>
 </resources>

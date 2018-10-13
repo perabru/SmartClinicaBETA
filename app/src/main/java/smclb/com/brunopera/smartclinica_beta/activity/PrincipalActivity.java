@@ -25,19 +25,28 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 
 import smclb.com.brunopera.smartclinica_beta.R;
 import smclb.com.brunopera.smartclinica_beta.config.ConfiguracaoFirebase;
+import smclb.com.brunopera.smartclinica_beta.helper.Base64Custom;
+import smclb.com.brunopera.smartclinica_beta.model.Idade;
+import smclb.com.brunopera.smartclinica_beta.model.Prontuario;
+import smclb.com.brunopera.smartclinica_beta.model.Usuario;
 
 public class PrincipalActivity extends AppCompatActivity {
 
-    private FirebaseAuth autenticacao;
-    private TextView txtOla;
 
+    private TextView txtSaudacao;
+    private TextView txtEmail;
+    private TextView txtKey;
 
-
-
+    private FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+    private DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +55,12 @@ public class PrincipalActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
+        recuperarDadosCadastrais();
         // FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+        txtSaudacao = findViewById(R.id.txtSaudacao);
+        txtEmail= findViewById(R.id.txtEmail);
+        txtKey = findViewById(R.id.txtKey);
+
 
     }
 
@@ -90,8 +103,11 @@ public class PrincipalActivity extends AppCompatActivity {
 
     public void iniciarProntuario(View view) {
 
-        // startActivity(new Intent(this, Idade.class));
-        // finish();
+        startActivity(new Intent(this, Idade.class));
+        finish();
+        //Prontuario prontuario = new Prontuario();
+        //prontuario.setIdade("27");
+       // prontuario.salvar();
 
     }
 
@@ -101,6 +117,32 @@ public class PrincipalActivity extends AppCompatActivity {
 
         //startActivity(new Intent(this, VerProntuario.class));
         // finish();
+
+    }
+
+    public void recuperarDadosCadastrais(){
+
+        final String emailUsuario = autenticacao.getCurrentUser().getEmail();
+        final String idUsuario = Base64Custom.codificarBase64( emailUsuario );
+        final DatabaseReference usuarioRef = firebaseRef.child("usuarios").child( idUsuario );
+
+        usuarioRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+                Usuario usuario = dataSnapshot.getValue( Usuario.class );
+
+                txtSaudacao.setText("Olá, "+ usuario.getNome());
+                txtEmail.setText(usuario.getEmail());
+                txtKey.setText(idUsuario);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 

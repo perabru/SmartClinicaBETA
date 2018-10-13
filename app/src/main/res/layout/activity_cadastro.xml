@@ -16,14 +16,14 @@
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editNome"
+        app:layout_constraintBottom_toTopOf="@+id/editIdade"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <EditText
-        android:id="@+id/editNome"
+        android:id="@+id/editIdade"
         android:layout_width="305dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -52,7 +52,7 @@
         app:layout_constraintBottom_toTopOf="@+id/editSenha"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editNome" />
+        app:layout_constraintTop_toBottomOf="@+id/editIdade" />
 
     <EditText
         android:id="@+id/editSenha"
