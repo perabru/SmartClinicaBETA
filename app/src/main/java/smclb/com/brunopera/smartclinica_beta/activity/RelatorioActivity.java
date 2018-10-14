@@ -1,15 +1,21 @@
 package smclb.com.brunopera.smartclinica_beta.activity;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,8 +24,22 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfWriter;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import smclb.com.brunopera.smartclinica_beta.R;
 import smclb.com.brunopera.smartclinica_beta.config.ConfiguracaoFirebase;
@@ -32,6 +52,11 @@ public class RelatorioActivity extends AppCompatActivity {
     private TextView txtCabecalho;
     private TextView txtBody;
     private TextView textView;
+    private ImageView imgLogo;
+
+    private File pdfFile;
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 111;
+
 
     private FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
     private DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
@@ -40,6 +65,8 @@ public class RelatorioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_relatorio);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        imgLogo = findViewById(R.id.imageView2);
 
         txtCabecalho = findViewById(R.id.txtCabecalho);
         txtBody = findViewById(R.id.txtBody);
@@ -222,24 +249,130 @@ public void compartilhar(View view){
 
     }
 
+
+    //----------------------------------------- PDF CREATOR
     public void gerarPDF(View view){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("SMART CLÍNICA");
-        builder.setMessage("Não disponível ainda");
-        builder.setCancelable(false);
-        builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                //finish();
+
+        //Link: https://developers.itextpdf.com/examples/image-examples-itext5/background-images
+        //https://www.androidtutorialpoint.com/basics/android-pdf-creator-tutorial/
+
+        try {
+            createPdfWrapper();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void createPdfWrapper() throws FileNotFoundException,DocumentException{
+
+        int hasWriteStoragePermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (hasWriteStoragePermission != PackageManager.PERMISSION_GRANTED) {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (!shouldShowRequestPermissionRationale(Manifest.permission.WRITE_CONTACTS)) {
+                    showMessageOKCancel("Você precisa permitir o acesso",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                                REQUEST_CODE_ASK_PERMISSIONS);
+                                    }
+                                }
+                            });
+                    return;
+                }
+
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        REQUEST_CODE_ASK_PERMISSIONS);
             }
-        });
+            return;
+        }else {
+            createPdf();
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_PERMISSIONS:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission Granted
+                    try {
+                        createPdfWrapper();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (DocumentException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    // Permission Denied
+                    Toast.makeText(this, "WRITE_EXTERNAL Permissão negada", Toast.LENGTH_SHORT)
+                            .show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new android.support.v7.app.AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
+    }
 
-        AlertDialog dialog = builder.create();
-        dialog.show();
+    private void createPdf() throws FileNotFoundException, DocumentException {
 
+        File docsFolder = new File(Environment.getExternalStorageDirectory() + "/Documents");
+        if (!docsFolder.exists()) {
+            docsFolder.mkdir();
 
+        }
+
+        pdfFile = new File(docsFolder.getAbsolutePath(),"ProntuarioSmartClinica.pdf");
+        OutputStream output = new FileOutputStream(pdfFile);
+        Document document = new Document();
+        PdfWriter.getInstance(document, output);
+        document.open();
+
+        Font font = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD);
+
+        document.add(new Paragraph("Relatório Smart Clínica", font));
+       document.add(new Paragraph(
+                "\n"+txtCabecalho.getText().toString()
+                + "\n"+ txtBody.getText()));
+
+        document.close();
+        previewPdf();
 
     }
+
+    private void previewPdf() {
+
+        PackageManager packageManager = getPackageManager();
+        Intent testIntent = new Intent(Intent.ACTION_VIEW);
+        testIntent.setType("application/pdf");
+        List list = packageManager.queryIntentActivities(testIntent, PackageManager.MATCH_DEFAULT_ONLY);
+        if (list.size() > 0) {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_VIEW);
+            Uri uri = Uri.fromFile(pdfFile);
+            intent.setDataAndType(uri, "application/pdf");
+
+            startActivity(intent);
+        }else{
+            Toast.makeText(this,"Faça o download de um visualizador de PDF como o Adobe por exemplo",Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+
+    //------------------------------------------------------- FIM PDF CREATOR
     public void enviarEmailRelatorio(View view) {
 
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
