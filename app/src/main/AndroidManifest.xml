@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="smclb.com.brunopera.smartclinica_beta">
 
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,19 +27,8 @@
             android:name=".activity.PrincipalActivity"
             android:label="@string/title_activity_principal"
             android:theme="@style/AppTheme" />
-        <activity android:name=".model.Idade" />
-        <activity android:name=".model.DataNascimento" />
-        <activity android:name=".model.EstadoCivil" />
-        <activity android:name=".model.Endereco" />
-        <activity android:name=".model.Bairro" />
-        <activity android:name=".model.Cidade" />
-        <activity android:name=".model.CEP" />
-        <activity android:name=".model.Telefone" />
-        <activity android:name=".model.Celular" />
-        <activity android:name=".model.Profissao" />
-        <activity android:name=".model.Medicamentos" />
-        <activity android:name=".model.Orteses" />
-        <activity android:name=".activity.RelatorioActivity"></activity>
+        <activity android:name=".activity.RelatorioActivity" />
+        <activity android:name=".activity.ProntuarioActivity"></activity>
     </application>
 
 </manifest>

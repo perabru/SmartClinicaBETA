@@ -5,6 +5,7 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 
 import smclb.com.brunopera.smartclinica_beta.config.ConfiguracaoFirebase;
 import smclb.com.brunopera.smartclinica_beta.helper.Base64Custom;
@@ -28,19 +29,24 @@ public class Prontuario {
     private String conclusao;
     private String metas;
 
+    private static String uniquePK = ConfiguracaoFirebase.getFirebaseDatabase().push().getKey();
+
 
     public Prontuario() {
     }
 
 
     public void salvar(){
+
+
         FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         idUsuario = Base64Custom.codificarBase64( autenticacao.getCurrentUser().getEmail() );
+
 
         DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDatabase();
         firebase.child("prontuario")
                 .child(this.idUsuario )
-                .push()
+                .child(uniquePK)
                 .setValue(this);
 
 

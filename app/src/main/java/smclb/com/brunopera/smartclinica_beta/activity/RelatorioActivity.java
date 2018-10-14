@@ -1,5 +1,7 @@
 package smclb.com.brunopera.smartclinica_beta.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
@@ -9,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -22,13 +25,13 @@ import smclb.com.brunopera.smartclinica_beta.R;
 import smclb.com.brunopera.smartclinica_beta.config.ConfiguracaoFirebase;
 import smclb.com.brunopera.smartclinica_beta.helper.Base64Custom;
 import smclb.com.brunopera.smartclinica_beta.model.Prontuario;
-import smclb.com.brunopera.smartclinica_beta.model.Telefone;
 import smclb.com.brunopera.smartclinica_beta.model.Usuario;
 
 public class RelatorioActivity extends AppCompatActivity {
 
     private TextView txtCabecalho;
     private TextView txtBody;
+    private TextView textView;
 
     private FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
     private DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
@@ -40,9 +43,13 @@ public class RelatorioActivity extends AppCompatActivity {
 
         txtCabecalho = findViewById(R.id.txtCabecalho);
         txtBody = findViewById(R.id.txtBody);
-
-        recuperarBody();
+        textView = findViewById(R.id.textView);
         recuperarCabecalho();
+
+
+            recuperarBody();
+
+
     }
 
     public void recuperarBody() {
@@ -51,116 +58,77 @@ public class RelatorioActivity extends AppCompatActivity {
         final String idUsuario = Base64Custom.codificarBase64(emailUsuario);
         final DatabaseReference usuarioRef = firebaseRef.child("prontuario").child(idUsuario);
 
-
-
-
-        /*usuarioRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-
-                txtBody.setText(dataSnapshot.getValue().toString());
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
-
         usuarioRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                try {
+                    ArrayList<String> arrBody = new ArrayList<String>();
 
-                ArrayList<String> arrBody = new ArrayList<String>();
-               for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    Prontuario prontuario = snapshot.getValue(Prontuario.class);
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Prontuario prontuario = snapshot.getValue(Prontuario.class);
+                        arrBody.add(prontuario.getIdade());
+                        arrBody.add(prontuario.getDataNascimento());
+                        arrBody.add(prontuario.getEstadoCivil());
+                        arrBody.add(prontuario.getEndereco());
+                        arrBody.add(prontuario.getBairro());
+                        arrBody.add(prontuario.getCidade());
+                        arrBody.add(prontuario.getCEP());
+                        arrBody.add(prontuario.getTelefone());
+                        arrBody.add(prontuario.getCelular());
+                        arrBody.add(prontuario.getProfissao());
+                        arrBody.add(prontuario.getMedicamentos());
+                        arrBody.add(prontuario.getOrteses());
+                        arrBody.add(prontuario.getComplicacoesEDeformidadesPorSeguimento());
+                        arrBody.add(prontuario.getConclusao());
+                        arrBody.add(prontuario.getEncurtamentoPorSeguimento());
+                        arrBody.add(prontuario.getForcaMuscularPorSeguimento());
+                        arrBody.add(prontuario.getFrequenciaCardiaca());
+                        arrBody.add(prontuario.getMetas());
+                        arrBody.add(prontuario.getPressaoArterial());
+                        arrBody.add(prontuario.getReflexosOsteotendineos());
+                        arrBody.add(prontuario.getSensibilidadeProfunda());
+                        arrBody.add(prontuario.getSensibilidadeSuperficial());
+                        arrBody.add(prontuario.getSensibilidadeSuperficial());
+                        arrBody.add(prontuario.getTonusMuscular());
+                        arrBody.add(prontuario.getTrocasPosturais());
 
-                   arrBody.add(prontuario.getIdade());
-                   arrBody.add(prontuario.getDataNascimento());
-                   arrBody.add(prontuario.getEstadoCivil());
-                   arrBody.add(prontuario.getEndereco());
-                   arrBody.add(prontuario.getBairro());
-                   arrBody.add(prontuario.getCidade());
-                   arrBody.add(prontuario.getCEP());
-                   arrBody.add(prontuario.getTelefone());
-                   arrBody.add(prontuario.getCelular());
-                   arrBody.add(prontuario.getProfissao());
-                   arrBody.add(prontuario.getMedicamentos());
-                   arrBody.add(prontuario.getOrteses());
-                   arrBody.add(prontuario.getComplicacoesEDeformidadesPorSeguimento());
-                   arrBody.add(prontuario.getConclusao());
-                   arrBody.add(prontuario.getEncurtamentoPorSeguimento());
-                   arrBody.add(prontuario.getForcaMuscularPorSeguimento());
-                   arrBody.add(prontuario.getFrequenciaCardiaca());
-                   arrBody.add(prontuario.getMetas());
-                   arrBody.add(prontuario.getPressaoArterial());
-                   arrBody.add(prontuario.getReflexosOsteotendineos());
-                   arrBody.add(prontuario.getSensibilidadeProfunda());
-                   arrBody.add(prontuario.getSensibilidadeSuperficial());
-                   arrBody.add(prontuario.getSensibilidadeSuperficial());
-                   arrBody.add(prontuario.getTonusMuscular());
-                   arrBody.add(prontuario.getTrocasPosturais());
-/*
-                    Log.i("DADO", "Idade: "+prontuario.getIdade());
-                   Log.i("DADO", "Nascimento: "+prontuario.getDataNascimento());
-                   Log.i("DADO", "Estado Civil: "+prontuario.getEstadoCivil());
-                   Log.i("DADO", "Endereco: "+prontuario.getEndereco());
-                   Log.i("DADO", "Bairro: "+prontuario.getBairro());
-                   Log.i("DADO", "Cidade: "+prontuario.getCidade());
-                   Log.i("DADO", "CEP: "+prontuario.getCEP());
-                   Log.i("DADO", "Telefone: "+prontuario.getTelefone());
-                   Log.i("DADO", "Celular: "+prontuario.getCelular());
-                   Log.i("DADO", "Profissao: "+prontuario.getProfissao());
-                   Log.i("DADO", "Medicamentos: "+prontuario.getMedicamentos());
-                   Log.i("DADO", "Orteses: "+prontuario.getOrteses());
-                   Log.i("DADO", "complicacoesEDeformidadesPorSeguimento: "+prontuario.getComplicacoesEDeformidadesPorSeguimento());
-                   Log.i("DADO", "encurtamentoPorSeguimento: "+prontuario.getEncurtamentoPorSeguimento());
-                   Log.i("DADO", "forcaMuscularPorSeguimento: "+prontuario.getForcaMuscularPorSeguimento());
-                   Log.i("DADO", "frequenciaCardiaca: "+prontuario.getFrequenciaCardiaca());
-                   Log.i("DADO", "metas: "+prontuario.getMetas());
-                   Log.i("DADO", "pressaoArterial: "+prontuario.getPressaoArterial());
-                   Log.i("DADO", "reflexosOsteotendineos: "+prontuario.getReflexosOsteotendineos());
-                   Log.i("DADO", "sensibilidadeProfunda: "+prontuario.getSensibilidadeProfunda());
-                   Log.i("DADO", "sensibilidadeSuperficial: "+prontuario.getSensibilidadeSuperficial());
-                   Log.i("DADO", "tonusMuscular: "+prontuario.getTonusMuscular());
-                   Log.i("DADO", "trocasPosturais: "+prontuario.getTrocasPosturais());*/
-
-                }
-/*
-                for(int i =0 ; i < arrBody.size(); i++){
+                    }
+                /*for(int i =0 ; i < arrBody.size(); i++){
                     Log.i("DADO", "VETOR: "+i +" "+arrBody.get(i));
                 }*/
-                txtBody.setText("Idade: "+arrBody.get(0).toString()+"\n"
-                        +"Data de Nascimento: "+arrBody.get(26)+ "\n"
-                        +"Estado Civil: "+arrBody.get(52) +"\n"
-                        +"Endereço: "+arrBody.get(78)+"\n"
-                        +"Bairro: "+arrBody.get(104)+"\n"
-                        +"Cidade: "+arrBody.get(130)+"\n"
-                        +"CEP: "+arrBody.get(156)+"\n"
-                        +"Telefone: "+arrBody.get(182)+"\n"
-                        +"Celular: "+arrBody.get(208)+"\n"
-                        +"Profissão: "+arrBody.get(234)+"\n"
-                        +"Medicamentos: "+arrBody.get(260)+"\n"
-                        +"Orteses: "+arrBody.get(286)+"\n"
-                        +"Complicacões e Deformidades por Seguimento: "+arrBody.get(287)+"\n"
-                        +"Conclusão "+arrBody.get(288)+"\n"
-                        +"Encurtamento por seguimento: "+arrBody.get(289)+"\n"
-                        +"Força Muscular por seguimento: "+arrBody.get(290)+"\n"
-                        +"Frequência Cardiaca: "+arrBody.get(291)+"\n"
-                        +"Metas: "+arrBody.get(292)+"\n"
-                        +"Pressão Arterial: "+arrBody.get(293)+"\n"
-                        +"Reflexos Osteotendineos: "+arrBody.get(294)+"\n"
-                        +"Sensibilidade Profunda: "+arrBody.get(295)+"\n"
-                        +"Sensibilidade Superficial: "+arrBody.get(296)+"\n"
-                        +"Tonus Muscular: "+arrBody.get(298)+"\n"
-                        +"Trocas Posturais: "+arrBody.get(299)+"\n"
+
+                    txtBody.setText("Idade: " + arrBody.get(0).toString() + "\n"
+                            + "Data de Nascimento: " + arrBody.get(1) + "\n"
+                            + "Estado Civil: " + arrBody.get(2) + "\n"
+                            + "Endereço: " + arrBody.get(3) + "\n"
+                            + "Bairro: " + arrBody.get(4) + "\n"
+                            + "Cidade: " + arrBody.get(5) + "\n"
+                            + "CEP: " + arrBody.get(6) + "\n"
+                            + "Telefone: " + arrBody.get(7) + "\n"
+                            + "Celular: " + arrBody.get(8) + "\n"
+                            + "Profissão: " + arrBody.get(9) + "\n"
+                            + "Medicamentos: " + arrBody.get(10) + "\n"
+                            + "Orteses: " + arrBody.get(11) + "\n"
+                            + "Complicacões e Deformidades por Seguimento: " + arrBody.get(12) + "\n"
+                            + "Conclusão " + arrBody.get(13) + "\n"
+                            + "Encurtamento por seguimento: " + arrBody.get(14) + "\n"
+                            + "Força Muscular por seguimento: " + arrBody.get(15) + "\n"
+                            + "Frequência Cardiaca: " + arrBody.get(16) + "\n"
+                            + "Metas: " + arrBody.get(17) + "\n"
+                            + "Pressão Arterial: " + arrBody.get(18) + "\n"
+                            + "Reflexos Osteotendineos: " + arrBody.get(19) + "\n"
+                            + "Sensibilidade Profunda: " + arrBody.get(20) + "\n"
+                            + "Sensibilidade Superficial: " + arrBody.get(21) + "\n"
+                            + "Tonus Muscular: " + arrBody.get(23) + "\n"
+                            + "Trocas Posturais: " + arrBody.get(24) + "\n"
 
 
-                );
+                    );
+                }catch (Exception ex){
+                    Toast.makeText(RelatorioActivity.this,"Prontuario incompleto, finalize-o antes!", Toast.LENGTH_SHORT).show();
+                    txtBody.setText("INCOMPLETO");
+                }
             }
 
             @Override
@@ -168,6 +136,8 @@ public class RelatorioActivity extends AppCompatActivity {
 
             }
         });
+
+
 
 
     }
@@ -200,12 +170,76 @@ public class RelatorioActivity extends AppCompatActivity {
 
     }
 
+/*
+    public  void gerarNotificacao(View view){
 
-    public  void gerarPDF(View view){
+        addNotification();
+    }
+
+
+
+
+    // Creates and displays a notification
+    private void addNotification() {
+
+
+
+        // Builds your notification
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setContentTitle("Smart Clinica")
+                .setContentText("Seu fisioterapeuta fez uma atualização!");
+
+        // Creates the intent needed to show the notification
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(contentIntent);
+
+        // Add as notification
+        NotificationManager manager = (NotificationManager) getSystemService(getApplicationContext().NOTIFICATION_SERVICE);
+        manager.notify(0, builder.build());
+    }
+
+*/
+
+
+public void compartilhar(View view){
+    Intent sendIntent = new Intent();
+    sendIntent.setAction(Intent.ACTION_SEND);
+    sendIntent.putExtra(Intent.EXTRA_TEXT, textView.getText().toString()+"\n"
+            + txtCabecalho.getText().toString() +"\n"
+            +txtBody.getText().toString());
+    sendIntent.setType("text/plain");
+    startActivity(sendIntent);
+}
+
+
+    public void atualizar(View view){
+        startActivity(new Intent(this, RelatorioActivity.class));
+        finish();
+
 
 
     }
 
+    public void gerarPDF(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("SMART CLÍNICA");
+        builder.setMessage("Não disponível ainda");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //finish();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+
+
+    }
     public void enviarEmailRelatorio(View view) {
 
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(

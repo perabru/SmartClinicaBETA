@@ -13,13 +13,13 @@
         android:id="@+id/appBarLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
+        android:layout_marginBottom="514dp"
         android:layout_marginTop="62dp"
         android:theme="@style/AppTheme.AppBarOverlay"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -36,19 +36,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:layout_marginEnd="89dp"
+        android:layout_marginRight="89dp"
         android:layout_marginTop="16dp"
         android:text="Relatório Smart Clinica"
         android:textColor="@android:color/black"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/scrollView3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:id="@+id/scrollView3"
         android:layout_width="0dp"
-        android:layout_height="415dp"
+        android:layout_height="491dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,8 +81,8 @@
 
             <TextView
                 android:id="@+id/txtBody"
-                android:layout_width="364dp"
-                android:layout_height="350dp"
+                android:layout_width="match_parent"
+                android:layout_height="434dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:text="CARREGANDO..."
@@ -138,16 +142,28 @@
         fab:menu_shadowYOffset="3dp"
         fab:menu_showShadow="true">
 
-        <com.github.clans.fab.FloatingActionButton
+        <!-- <com.github.clans.fab.FloatingActionButton
             android:id="@+id/menu2_gerarPDF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="gerarPDF"
-            android:src="@drawable/ic_picture_as_pdf_white_24dp"
+            android:onClick="gerarNotificacao"
+            android:src="@drawable/ic_insert_drive_file_white2_24dp"
             app:fab_colorNormal="@color/colorPrimaryMenuItem"
-            fab:fab_label="Gerar PDF"
-            fab:fab_size="mini" />
+            fab:fab_label="Salvar em arquivo de texto"
+            fab:fab_size="mini" />-->
 
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu2_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="atualizar"
+            android:src="@drawable/ic_refresh_white_24dp"
+            app:fab_colorNormal="@color/colorPrimaryMenuItem"
+            fab:fab_label="Atualizar Relatório"
+            fab:fab_size="mini"
+
+            />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/menu2_enviarEmail"
@@ -158,6 +174,32 @@
             app:fab_colorNormal="@color/colorPrimaryMenuItem"
             fab:fab_label="Enviar via e-mail"
             fab:fab_size="mini" />
+
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu2_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="compartilhar"
+            android:src="@drawable/ic_share_white_24dp"
+            app:fab_colorNormal="@color/colorPrimaryMenuItem"
+            fab:fab_label="Compartilhar"
+            fab:fab_size="mini"
+
+            />
+
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu2_pdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="gerarPDF"
+            android:src="@drawable/ic_picture_as_pdf_white_24dp"
+            app:fab_colorNormal="@color/colorPrimaryMenuItem"
+            fab:fab_label="Gerar PDF"
+            fab:fab_size="mini"
+
+            />
 
 
         <com.github.clans.fab.FloatingActionButton
@@ -174,6 +216,15 @@
 
 
     </com.github.clans.fab.FloatingActionMenu>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="68dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        fab:srcCompat="@drawable/smartclinicaico64" />
 
 
 </android.support.constraint.ConstraintLayout>

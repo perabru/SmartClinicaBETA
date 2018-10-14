@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/slideConstraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ProntuarioActivity"
+    tools:layout_editor_absoluteY="25dp">
+
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"></LinearLayout>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="70sp"
+                    android:layout_marginTop="15sp"
+                    android:text="Prontuário Smart Clinica"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/editIdade"
+                    android:layout_width="246dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:textSize="12sp"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:hint="Diga sua idade Ex: 27 Anos"
+                    android:inputType="textPersonName" />
+
+                <ImageView
+                    android:id="@+id/imgIdade"
+                    android:layout_width="47dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:onClick="gravarIdade"
+                    app:srcCompat="@drawable/ic_keyboard_voice_black_24dp" />
+            </TableRow>
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/editNascimento"
+                    android:layout_width="246dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:textSize="12sp"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:hint="Diga sua data de nascimento. Ex: 24 de Janeiro 1991 "
+                    android:inputType="textPersonName" />
+
+                <ImageView
+                    android:id="@+id/imgNascimento"
+                    android:layout_width="47dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:onClick="gravarDataNasc"
+                    app:srcCompat="@drawable/ic_keyboard_voice_black_24dp" />
+            </TableRow>
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/editEstadoCivil"
+                    android:layout_width="246dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:textSize="12sp"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:hint="Diga seu estado civil"
+                    android:inputType="textPersonName" />
+
+                <ImageView
+                    android:id="@+id/imgEstadoCivil"
+                    android:layout_width="47dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:onClick="gravarEstadoCivil"
+                    app:srcCompat="@drawable/ic_keyboard_voice_black_24dp" />
+            </TableRow>
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/editEndereco"
+                    android:layout_width="246dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:textSize="12sp"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:hint="Diga sua rua e número "
+                    android:inputType="textPersonName" />
+
+                <ImageView
+                    android:id="@+id/imgEndereco"
+                    android:layout_width="47dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:onClick="gravarEndereco"
+                    app:srcCompat="@drawable/ic_keyboard_voice_black_24dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/editBairro"
+                    android:layout_width="246dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:textSize="12sp"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:hint="Diga seu bairro"
+                    android:inputType="textPersonName" />
+
+                <ImageView
+                    android:id="@+id/imgBairro"
+                    android:layout_width="47dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:textSize="10sp"
+                    android:onClick="gravarBairro"
+                    app:srcCompat="@drawable/ic_keyboard_voice_black_24dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/editCidade"
+                    android:layout_width="246dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:textSize="12sp"
+                    android:hint="Diga sua cidade"
+                    android:inputType="textPersonName" />
+
+                <ImageView
+                    android:id="@+id/imgCidade"
+                    android:layout_width="47dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:onClick="gravarCidade"
+                    app:srcCompat="@drawable/ic_keyboard_voice_black_24dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/editCEP"
+                    android:layout_width="246dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:textSize="12sp"
+                    android:hint="Diga seu cep"
+                    android:inputType="textPersonName" />
+
+                <ImageView
+                    android:id="@+id/imgCEP"
+                    android:layout_width="47dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:onClick="gravarCEP"
+                    app:srcCompat="@drawable/ic_keyboard_voice_black_24dp" />
+            </TableRow>
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/editTelefone"
+                    android:layout_width="246dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:textSize="12sp"
+                    android:hint="Diga seu telefone"
+                    android:inputType="textPersonName" />
+
+                <ImageView
+                    android:id="@+id/imgTelefone"
+                    android:layout_width="47dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:onClick="gravarTelefone"
+                    app:srcCompat="@drawable/ic_keyboard_voice_black_24dp" />
+            </TableRow>
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/editCelular"
+                    android:layout_width="246dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:textSize="12sp"
+                    android:hint="Diga seu celular"
+                    android:inputType="textPersonName" />
+
+                <ImageView
+                    android:id="@+id/imgCelular"
+                    android:layout_width="47dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:onClick="gravarCelular"
+                    app:srcCompat="@drawable/ic_keyboard_voice_black_24dp" />
+            </TableRow>
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/editProfissao"
+                    android:layout_width="246dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:textSize="12sp"
+                    android:hint="Diga sua profissao"
+                    android:inputType="textPersonName" />
+
+                <ImageView
+                    android:id="@+id/imgProfissao"
+                    android:layout_width="47dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:onClick="gravarProfissao"
+                    app:srcCompat="@drawable/ic_keyboard_voice_black_24dp" />
+            </TableRow>
+
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/editMedicamentos"
+                    android:layout_width="246dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:hint="Algum medicamento ou cirurgia recente?"
+                    android:textSize="12sp"
+                    android:inputType="textPersonName" />
+
+                <ImageView
+                    android:id="@+id/imgMedicamentos"
+                    android:layout_width="47dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:onClick="gravarMedicamentos"
+                    app:srcCompat="@drawable/ic_keyboard_voice_black_24dp" />
+            </TableRow>
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/editOrteses"
+                    android:layout_width="246dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:textSize="12sp"
+                    android:hint="Possui alguma órtese ou dispositivo de auxilio?"
+                    android:inputType="textPersonName" />
+
+                <ImageView
+                    android:id="@+id/imgOrteses"
+                    android:layout_width="47dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginTop="30sp"
+                    android:onClick="gravarOrteses"
+                    app:srcCompat="@drawable/ic_keyboard_voice_black_24dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/gravarTudo"
+                    android:layout_width="185dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="56dp"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginTop="50dp"
+                    android:background="@android:color/holo_blue_bright"
+                    android:gravity="center_vertical|center_horizontal|center"
+                    android:onClick="GravarNoBD"
+                    android:text="Gravar"
+                    android:textColor="@android:color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.429"
+                    app:layout_constraintStart_toStartOf="parent" />
+        </TableRow>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>

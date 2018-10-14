@@ -7,24 +7,13 @@ import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.transition.Slide;
-import android.util.Log;
 import android.view.View;
-import android.widget.CalendarView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthInvalidUserException;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +23,6 @@ import com.google.firebase.database.ValueEventListener;
 import smclb.com.brunopera.smartclinica_beta.R;
 import smclb.com.brunopera.smartclinica_beta.config.ConfiguracaoFirebase;
 import smclb.com.brunopera.smartclinica_beta.helper.Base64Custom;
-import smclb.com.brunopera.smartclinica_beta.model.Idade;
 import smclb.com.brunopera.smartclinica_beta.model.Prontuario;
 import smclb.com.brunopera.smartclinica_beta.model.Usuario;
 
@@ -54,7 +42,7 @@ public class PrincipalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_principal);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         recuperarDadosCadastrais();
         // FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
         txtSaudacao = findViewById(R.id.txtSaudacao);
@@ -103,8 +91,9 @@ public class PrincipalActivity extends AppCompatActivity {
 
     public void iniciarProntuario(View view) {
 
-        startActivity(new Intent(this, Idade.class));
-        finish();
+
+        startActivity(new Intent(this, ProntuarioActivity.class));
+         finish();
         //Prontuario prontuario = new Prontuario();
         //prontuario.setIdade("27");
        // prontuario.salvar();
