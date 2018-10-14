@@ -19,9 +19,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +41,7 @@ public class ProntuarioActivity extends AppCompatActivity {
     //Array que recebe primeiramente o que foi falado (nome, sobrenome e idade)
     private ArrayList<String> voiceInText;
 
+    private Switch mSwitch;
 
     private EditText editIdade;
     private EditText editNascimento;
@@ -53,6 +56,18 @@ public class ProntuarioActivity extends AppCompatActivity {
     private EditText editMedicamentos;
     private EditText editOrteses;
 
+    private ImageView imgIdade;
+    private ImageView imgNascimento;
+    private ImageView imgEstadoCivil;
+    private ImageView imgEndereco;
+    private ImageView imgBairro;
+    private ImageView imgCidade;
+    private ImageView imgCEP;
+    private ImageView imgTelefone;
+    private ImageView imgCelular;
+    private ImageView imgProfissao;
+    private ImageView imgMedicamentos;
+    private ImageView imgOrteses;
 
 
     boolean flagIdade=false;
@@ -67,6 +82,10 @@ public class ProntuarioActivity extends AppCompatActivity {
     boolean flagProfissao =false;
     boolean flagMedicamentos =false;
     boolean flagOrteses =false;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +105,8 @@ public class ProntuarioActivity extends AppCompatActivity {
                 +"\n"+"\n"
                 +"Caso haja alguma informação que não possua, basta dizer 'Não se aplica'."
                 +"\n"+"\n"
+                +"Você pode preencher manualmente se assim desejar, basta pressionar o botão no topo."
+                +"\n"+"\n"
                 +"Faça esse processo apenas uma vez." );
         builder.setCancelable(false);
         builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
@@ -98,6 +119,21 @@ public class ProntuarioActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
+
+        mSwitch = findViewById(R.id.switch2);
+
+        imgIdade = findViewById(R.id.imgIdade);
+        imgNascimento = findViewById(R.id.imgNascimento);
+        imgEstadoCivil = findViewById(R.id.imgEstadoCivil);
+        imgEndereco = findViewById(R.id.imgEndereco);
+        imgBairro = findViewById(R.id.imgBairro);
+        imgCidade = findViewById(R.id.imgCidade);
+        imgCEP = findViewById(R.id.imgCEP);
+        imgTelefone = findViewById(R.id.imgTelefone);
+        imgCelular = findViewById(R.id.imgCelular);
+        imgProfissao = findViewById(R.id.imgProfissao);
+        imgMedicamentos = findViewById(R.id.imgMedicamentos);
+        imgOrteses = findViewById(R.id.imgOrteses);
 
         editIdade = findViewById(R.id.editIdade);
         editNascimento = findViewById(R.id.editNascimento);
@@ -112,6 +148,77 @@ public class ProntuarioActivity extends AppCompatActivity {
         editMedicamentos = findViewById(R.id.editMedicamentos);
         editOrteses = findViewById(R.id.editOrteses);
 
+
+        mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(mSwitch.isChecked()){
+                    mSwitch.setText("Modo manual ativado");
+
+                    editIdade.setEnabled(true);
+                    editNascimento.setEnabled(true);
+                    editEstadoCivil.setEnabled(true);
+                    editEndereco.setEnabled(true);
+                    editBairro.setEnabled(true);
+                    editCidade.setEnabled(true);
+                    editCEP.setEnabled(true);
+                    editTelefone.setEnabled(true);
+                    editCelular.setEnabled(true);
+                    editProfissao.setEnabled(true);
+                    editMedicamentos.setEnabled(true);
+                    editOrteses.setEnabled(true);
+
+                    imgIdade.setEnabled(false);
+                    imgNascimento.setEnabled(false);
+                    imgEstadoCivil.setEnabled(false);
+                    imgEndereco.setEnabled(false);
+                    imgBairro.setEnabled(false);
+                    imgCidade.setEnabled(false);
+                    imgCEP.setEnabled(false);
+                    imgTelefone.setEnabled(false);
+                    imgCelular.setEnabled(false);
+                    imgProfissao.setEnabled(false);
+                    imgMedicamentos.setEnabled(false);
+                    imgOrteses.setEnabled(false);
+
+
+
+
+                } else {
+                    mSwitch.setText("Modo por voz ativado");
+                    editIdade.setEnabled(false);
+                    editNascimento.setEnabled(false);
+                    editEstadoCivil.setEnabled(false);
+                    editEndereco.setEnabled(false);
+                    editBairro.setEnabled(false);
+                    editCidade.setEnabled(false);
+                    editCEP.setEnabled(false);
+                    editTelefone.setEnabled(false);
+                    editCelular.setEnabled(false);
+                    editProfissao.setEnabled(false);
+                    editMedicamentos.setEnabled(false);
+                    editOrteses.setEnabled(false);
+
+
+
+
+                    imgIdade.setEnabled(true);
+                    imgNascimento.setEnabled(true);
+                    imgEstadoCivil.setEnabled(true);
+                    imgEndereco.setEnabled(true);
+                    imgBairro.setEnabled(true);
+                    imgCidade.setEnabled(true);
+                    imgCEP.setEnabled(true);
+                    imgTelefone.setEnabled(true);
+                    imgCelular.setEnabled(true);
+                    imgProfissao.setEnabled(true);
+                    imgMedicamentos.setEnabled(true);
+                    imgOrteses.setEnabled(true);
+                }
+
+
+            }
+        });
 
 
     }
