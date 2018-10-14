@@ -43,7 +43,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
     private TextView txtSaudacao;
     private TextView txtEmail;
-    private TextView txtKey;
+   // private TextView txtKey;
 
     private FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
     private DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
@@ -59,7 +59,7 @@ public class PrincipalActivity extends AppCompatActivity {
         // FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
         txtSaudacao = findViewById(R.id.txtSaudacao);
         txtEmail= findViewById(R.id.txtEmail);
-        txtKey = findViewById(R.id.txtKey);
+        //txtKey = findViewById(R.id.txtKey);
 
 
     }
@@ -115,8 +115,8 @@ public class PrincipalActivity extends AppCompatActivity {
 
     public void verProntuario(View view) {
 
-        //startActivity(new Intent(this, VerProntuario.class));
-        // finish();
+        startActivity(new Intent(this, RelatorioActivity.class));
+        finish();
 
     }
 
@@ -135,7 +135,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
                 txtSaudacao.setText("Olá, "+ usuario.getNome());
                 txtEmail.setText(usuario.getEmail());
-                txtKey.setText(idUsuario);
+               //txtKey.setText(idUsuario);
             }
 
             @Override

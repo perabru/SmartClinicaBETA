@@ -29,8 +29,7 @@ import smclb.com.brunopera.smartclinica_beta.helper.Base64Custom;
 
 public class DataNascimento extends AppCompatActivity {
 
-    private FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-    private DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
+
 
 
     private ImageView imgGravar;
@@ -68,7 +67,7 @@ public class DataNascimento extends AppCompatActivity {
         Intent myIntent = new Intent(getApplicationContext(), EstadoCivil.class);
          startActivityForResult(myIntent, 0);
 
-        recover();
+
         finish();
 
 
@@ -128,29 +127,5 @@ public class DataNascimento extends AppCompatActivity {
         }
     }
 
-   public void recover() {
-
-       final String emailUsuario = autenticacao.getCurrentUser().getEmail();
-       final String idUsuario = Base64Custom.codificarBase64(emailUsuario);
-       final DatabaseReference usuarioRef = firebaseRef.child("prontuario");
-
-
-       usuarioRef.addValueEventListener(new ValueEventListener() {
-           @Override
-           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-
-               Prontuario prontuario = dataSnapshot.getValue(Prontuario.class);
-
-               Log.i("DADOS", dataSnapshot.getValue().toString());
-
-           }
-
-           @Override
-           public void onCancelled(@NonNull DatabaseError databaseError) {
-
-           }
-       });
-   }
 
 }

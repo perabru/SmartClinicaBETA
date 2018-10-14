@@ -11,10 +11,12 @@
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
-        android:layout_width="1dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
         android:layout_marginTop="62dp"
         android:theme="@style/AppTheme.AppBarOverlay"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -29,31 +31,78 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <com.prolificinteractive.materialcalendarview.MaterialCalendarView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/calendarView"
-        android:layout_width="0dp"
-        android:layout_height="259dp"
-        android:layout_marginBottom="133dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Relatório Smart Clinica"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:mcv_selectionColor="@color/colorAccentMenuItem"
-        app:mcv_showOtherDates="all" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="0dp"
+        android:layout_height="415dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtCabecalho"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="CARREGANDO..."
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <TextView
+                android:id="@+id/txtBody"
+                android:layout_width="364dp"
+                android:layout_height="350dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:text="CARREGANDO..."
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteX="12dp"
+                tools:layout_editor_absoluteY="280dp" />
+        </LinearLayout>
+    </ScrollView>
 
     <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/menu"
+        android:id="@+id/menu2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="23dp"
+        android:layout_marginBottom="22dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         app:fab_colorNormal="@color/colorPrimaryMenuItem"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         fab:menu_animationDelayPerItem="50"
         fab:menu_backgroundColor="@android:color/transparent"
         fab:menu_buttonSpacing="0dp"
@@ -90,101 +139,41 @@
         fab:menu_showShadow="true">
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_verProntuario"
+            android:id="@+id/menu2_gerarPDF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="verProntuario"
-            android:src="@drawable/ic_folder_white_24dp"
+            android:onClick="gerarPDF"
+            android:src="@drawable/ic_picture_as_pdf_white_24dp"
             app:fab_colorNormal="@color/colorPrimaryMenuItem"
-            fab:fab_label="Ver meu prontuario"
+            fab:fab_label="Gerar PDF"
+            fab:fab_size="mini" />
+
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu2_enviarEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="enviarEmailRelatorio"
+            android:src="@drawable/ic_email_white_24dp"
+            app:fab_colorNormal="@color/colorPrimaryMenuItem"
+            fab:fab_label="Enviar via e-mail"
+            fab:fab_size="mini" />
+
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu2_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="voltarInicio"
+            android:src="@drawable/ic_home_white_24dp"
+            app:fab_colorNormal="@color/colorPrimaryMenuItem"
+            fab:fab_label="Inicio"
             fab:fab_size="mini"
 
             />
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_iniciarProntuario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="iniciarProntuario"
-            android:src="@drawable/ic_mic_white_24dp"
-            app:fab_colorNormal="@color/colorPrimaryMenuItem"
-            fab:fab_label="Iniciar prontuario"
-            fab:fab_size="mini" />
-
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_iniciarChat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="iniciarChat"
-            android:src="@drawable/ic_chat_white_24dp"
-            app:fab_colorNormal="@color/colorPrimaryMenuItem"
-            fab:fab_label="Iniciar chat"
-            fab:fab_size="mini" />
-
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="enviarEmail"
-            android:src="@drawable/ic_email_white_24dp"
-            app:fab_colorNormal="@color/colorPrimaryMenuItem"
-
-            fab:fab_label="Enviar e-mail"
-            fab:fab_size="mini" />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_desconectar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="desconectarUsuario"
-            android:src="@drawable/ic_import_export_white_24dp"
-            app:fab_colorNormal="@color/colorPrimaryMenuItem"
-            fab:fab_label="Desconectar"
-            fab:fab_size="mini" />
-
 
     </com.github.clans.fab.FloatingActionMenu>
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="385dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="7dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@android:color/holo_blue_bright"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/calendarView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/txtSaudacao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="12sp"
-            android:layout_marginTop="12sp"
-            android:text="Carregando..."
-            android:textColor="@android:color/white"
-            android:textSize="25sp" />
-
-        <TextView
-            android:id="@+id/txtEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="12sp"
-            android:layout_marginTop="32sp"
-            android:text="Carregando..."
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
-
-    </LinearLayout>
 
 
 </android.support.constraint.ConstraintLayout>

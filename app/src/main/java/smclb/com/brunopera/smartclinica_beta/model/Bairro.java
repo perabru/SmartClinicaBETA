@@ -74,8 +74,8 @@ public class Bairro extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(), "Gravado com sucesso", Toast.LENGTH_SHORT).show();
 
-        // Intent myIntent = new Intent(getApplicationContext(), EstadoCivil.class);
-        // startActivityForResult(myIntent, 0);
+         Intent myIntent = new Intent(getApplicationContext(), Cidade.class);
+         startActivityForResult(myIntent, 0);
 
 
         finish();

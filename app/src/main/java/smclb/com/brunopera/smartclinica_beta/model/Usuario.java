@@ -3,6 +3,9 @@ package smclb.com.brunopera.smartclinica_beta.model;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+
 import smclb.com.brunopera.smartclinica_beta.config.ConfiguracaoFirebase;
 
 public class Usuario {
@@ -11,7 +14,7 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha;
-
+    private String dataAtual;
 
 
 
@@ -61,4 +64,11 @@ public class Usuario {
         this.idUsuario = idUsuario;
     }
 
+    public String getDataAtual() {
+        return dataAtual;
+    }
+
+    public void setDataAtual(String dataAtual) {
+        this.dataAtual = dataAtual;
+    }
 }

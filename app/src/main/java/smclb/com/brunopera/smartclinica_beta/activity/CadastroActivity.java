@@ -16,6 +16,9 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+
 import smclb.com.brunopera.smartclinica_beta.R;
 import smclb.com.brunopera.smartclinica_beta.config.ConfiguracaoFirebase;
 import smclb.com.brunopera.smartclinica_beta.helper.Base64Custom;
@@ -27,6 +30,9 @@ public class CadastroActivity extends AppCompatActivity {
     private Button botaoCadastrar;
     private FirebaseAuth autenticacao;
     private Usuario usuario;
+
+    private Calendar data = Calendar.getInstance();
+    private String dataAtual = DateFormat.getDateInstance().format(data.getTime());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +62,7 @@ public class CadastroActivity extends AppCompatActivity {
                             usuario.setNome(textoNome);
                             usuario.setEmail(textoEmail);
                             usuario.setSenha(textoSenha);
+                            usuario.setDataAtual(dataAtual);
                             cadastrarUsuario();
 
                         }else{

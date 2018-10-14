@@ -35,7 +35,8 @@
         <activity android:name=".model.Celular" />
         <activity android:name=".model.Profissao" />
         <activity android:name=".model.Medicamentos" />
-        <activity android:name=".model.Orteses"></activity>
+        <activity android:name=".model.Orteses" />
+        <activity android:name=".activity.RelatorioActivity"></activity>
     </application>
 
 </manifest>

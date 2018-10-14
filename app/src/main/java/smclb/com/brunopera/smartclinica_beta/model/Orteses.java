@@ -20,7 +20,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Locale;
 
 import smclb.com.brunopera.smartclinica_beta.R;
@@ -31,7 +33,8 @@ public class Orteses extends AppCompatActivity {
 
     private FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
     private DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
-
+    private Calendar data = Calendar.getInstance();
+    private String dataAtual = DateFormat.getDateInstance().format(data.getTime());
 
     private ImageView imgGravar;
     private ImageView imgCheck;
@@ -70,12 +73,28 @@ public class Orteses extends AppCompatActivity {
         Prontuario prontuario = new Prontuario();
 
         prontuario.setOrteses(editOrteses.getText().toString());
+        prontuario.setPressaoArterial("AGUARDANDO ATUALIZAÇÃO");
+        prontuario.setFrequenciaCardiaca("AGUARDANDO ATUALIZAÇÃO");
+        prontuario.setReflexosOsteotendineos("AGUARDANDO ATUALIZAÇÃO");
+        prontuario.setTonusMuscular("AGUARDANDO ATUALIZAÇÃO");
+        prontuario.setSensibilidadeSuperficial("AGUARDANDO ATUALIZAÇÃO");
+        prontuario.setSensibilidadeProfunda("AGUARDANDO ATUALIZAÇÃO");
+        prontuario.setTrocasPosturais("AGUARDANDO ATUALIZAÇÃO");
+        prontuario.setForcaMuscularPorSeguimento("AGUARDANDO ATUALIZAÇÃO");
+        prontuario.setEncurtamentoPorSeguimento("AGUARDANDO ATUALIZAÇÃO");
+        prontuario.setComplicacoesEDeformidadesPorSeguimento("AGUARDANDO ATUALIZAÇÃO");
+        prontuario.setConclusao("AGUARDANDO ATUALIZAÇÃO");
+        prontuario.setMetas("AGUARDANDO ATUALIZAÇÃO");
+
+
+
+
         prontuario.salvar();
 
         Toast.makeText(getApplicationContext(), "Gravado com sucesso", Toast.LENGTH_SHORT).show();
 
-        Intent myIntent = new Intent(getApplicationContext(), Orteses.class);
-        startActivityForResult(myIntent, 0);
+        //Intent myIntent = new Intent(getApplicationContext(), Orteses.class);
+        //startActivityForResult(myIntent, 0);
 
 
         finish();
