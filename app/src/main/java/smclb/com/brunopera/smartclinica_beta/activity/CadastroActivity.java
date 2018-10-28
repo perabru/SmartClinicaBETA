@@ -1,16 +1,21 @@
 package smclb.com.brunopera.smartclinica_beta.activity;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
@@ -24,6 +29,10 @@ import smclb.com.brunopera.smartclinica_beta.config.ConfiguracaoFirebase;
 import smclb.com.brunopera.smartclinica_beta.helper.Base64Custom;
 import smclb.com.brunopera.smartclinica_beta.model.Usuario;
 
+
+
+
+
 public class CadastroActivity extends AppCompatActivity {
 
     private EditText campoNome, campoEmail, campoSenha;
@@ -34,15 +43,25 @@ public class CadastroActivity extends AppCompatActivity {
     private Calendar data = Calendar.getInstance();
     private String dataAtual = DateFormat.getDateInstance().format(data.getTime());
 
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
 
+
+
+
         campoNome = findViewById(R.id.scrView);
         campoEmail = findViewById(R.id.editEmail);
         campoSenha = findViewById(R.id.editSenha);
         botaoCadastrar = findViewById(R.id.buttonCadastrar);
+
+
+
 
 
         botaoCadastrar.setOnClickListener(new View.OnClickListener() {
@@ -128,6 +147,14 @@ public class CadastroActivity extends AppCompatActivity {
 
 
 
-
     }
+
+
+
+
+
+
+
+
+
 }

@@ -44,6 +44,7 @@ import java.util.List;
 import smclb.com.brunopera.smartclinica_beta.R;
 import smclb.com.brunopera.smartclinica_beta.config.ConfiguracaoFirebase;
 import smclb.com.brunopera.smartclinica_beta.helper.Base64Custom;
+import smclb.com.brunopera.smartclinica_beta.model.Historico;
 import smclb.com.brunopera.smartclinica_beta.model.Prontuario;
 import smclb.com.brunopera.smartclinica_beta.model.Usuario;
 
@@ -51,6 +52,7 @@ public class RelatorioActivity extends AppCompatActivity {
 
     private TextView txtCabecalho;
     private TextView txtBody;
+    private TextView txtHistorico;
     private TextView textView;
     private ImageView imgLogo;
 
@@ -70,12 +72,12 @@ public class RelatorioActivity extends AppCompatActivity {
 
         txtCabecalho = findViewById(R.id.txtCabecalho);
         txtBody = findViewById(R.id.txtBody);
+       // txtHistorico = findViewById(R.id.txtHistorico);
         textView = findViewById(R.id.textView);
+
         recuperarCabecalho();
-
-
-            recuperarBody();
-
+        recuperarBody();
+       // recuperarHistorico();
 
     }
 
@@ -135,11 +137,11 @@ public class RelatorioActivity extends AppCompatActivity {
                             + "Telefone: " + arrBody.get(7) + "\n"
                             + "Celular: " + arrBody.get(8) + "\n"
                             + "Profissão: " + arrBody.get(9) + "\n"
-                            + "Medicamentos: " + arrBody.get(10) + "\n"
+                            //+ "Medicamentos: " + arrBody.get(10) + "\n"
                             + "Orteses: " + arrBody.get(11) + "\n"
                             + "Complicacões e Deformidades por Seguimento: " + arrBody.get(12) + "\n"
                             + "Conclusão " + arrBody.get(13) + "\n"
-                            + "Encurtamento por seguimento: " + arrBody.get(14) + "\n"
+                            //+ "Encurtamento por seguimento: " + arrBody.get(14) + "\n"
                             + "Força Muscular por seguimento: " + arrBody.get(15) + "\n"
                             + "Frequência Cardiaca: " + arrBody.get(16) + "\n"
                             + "Metas: " + arrBody.get(17) + "\n"
@@ -195,6 +197,52 @@ public class RelatorioActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    public void recuperarHistorico(){
+        final String emailUsuario = autenticacao.getCurrentUser().getEmail();
+        final String idUsuario = Base64Custom.codificarBase64( emailUsuario );
+        final DatabaseReference usuarioRef = firebaseRef.child("historico").child( idUsuario );
+
+/*
+        usuarioRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Historico historico = dataSnapshot.getValue( Historico.class );
+
+                txtHistorico.setText("Data: "+historico.getData()
+                        +"\n"+ "Evolução: "+historico.getEvolucao());
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+*/
+
+
+      /*usuarioRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Historico historico= snapshot.getValue(Historico.class);
+                    txtHistorico.setText(historico.getData()
+                                        + "\n"
+                                        +historico.getEvolucao());
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });*/
     }
 
 /*

@@ -6,8 +6,8 @@ android {
         applicationId "smclb.com.brunopera.smartclinica_beta"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 4
-        versionName "4.0"
+        versionCode 5
+        versionName "5.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -44,6 +44,8 @@ dependencies {
     implementation 'com.prolificinteractive:material-calendarview:1.4.3'
 
     implementation 'com.itextpdf:itextg:5.5.10'
+
+
 
 
 }
