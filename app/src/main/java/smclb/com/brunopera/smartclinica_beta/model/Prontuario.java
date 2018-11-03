@@ -28,6 +28,7 @@ public class Prontuario {
     private String complicacoesEDeformidadesPorSeguimento;
     private String conclusao;
     private String metas;
+    private String queixaPrincipal;
 
 
     private static String uniquePK = ConfiguracaoFirebase.getFirebaseDatabase().push().getKey();
@@ -47,7 +48,7 @@ public class Prontuario {
         DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDatabase();
         firebase.child("prontuario")
                 .child(this.idUsuario )
-                .child(uniquePK)
+                .child("001")
                 .setValue(this);
 
 
@@ -248,5 +249,11 @@ public class Prontuario {
         this.metas = metas;
     }
 
+    public String getQueixaPrincipal() {
+        return queixaPrincipal;
+    }
 
+    public void setQueixaPrincipal(String queixaPrincipal) {
+        this.queixaPrincipal = queixaPrincipal;
+    }
 }

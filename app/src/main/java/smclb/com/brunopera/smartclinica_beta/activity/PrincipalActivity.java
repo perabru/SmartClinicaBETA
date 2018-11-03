@@ -219,6 +219,7 @@ public class PrincipalActivity extends AppCompatActivity {
         CalendarDay dataAtual  = calendarView.getCurrentDate();
         String mesSelecionado = String.format("%02d",(dataAtual.getMonth()+1));
 
+
         mesAnoSelecionado =  String.valueOf((mesSelecionado+""+dataAtual.getYear()));
         calendarView.setOnMonthChangedListener(new OnMonthChangedListener() {
             @Override

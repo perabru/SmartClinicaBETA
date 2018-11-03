@@ -99,7 +99,7 @@ public class ProntuarioActivity extends AppCompatActivity {
         builder.setTitle("SMART CLÍNICA - INSTRUÇÕES");
         builder.setMessage("Antes de clicar no botão 'Gravar' tenha certeza que preencheu todos os campos."
                 +"\n"+"\n"
-                +"Se estiver com problemas da detecção de voz os campos são editaveis."
+                +"Se estiver com problemas na detecção de voz os campos são editáveis."
                 +"\n"+"\n"
                 +"Tenha pelo menos 10 minutos disponíveis para o cadastro."
                 +"\n"+"\n"
@@ -450,6 +450,7 @@ public class ProntuarioActivity extends AppCompatActivity {
         prontuario.setSensibilidadeSuperficial("Aguardando atualização do Fisioterapeuta");
         prontuario.setTonusMuscular("Aguardando atualização do Fisioterapeuta");
         prontuario.setTrocasPosturais("Aguardando atualização do Fisioterapeuta");
+        prontuario.setQueixaPrincipal("Aguardando atualização do Fisioterapeuta");
         prontuario.salvar();
         Toast.makeText(getApplicationContext(), "Gravado com sucesso", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this, PrincipalActivity.class));

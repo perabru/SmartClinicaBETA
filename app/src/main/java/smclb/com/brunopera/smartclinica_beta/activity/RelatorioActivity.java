@@ -155,7 +155,7 @@ public class RelatorioActivity extends AppCompatActivity {
 
                     );
                 }catch (Exception ex){
-                    Toast.makeText(RelatorioActivity.this,"Prontuario incompleto, finalize-o antes!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RelatorioActivity.this, ex.toString(), Toast.LENGTH_LONG).show();
                     txtBody.setText("INCOMPLETO");
                 }
             }
