@@ -199,53 +199,7 @@ public class RelatorioActivity extends AppCompatActivity {
 
     }
 
-
-    public void recuperarHistorico(){
-        final String emailUsuario = autenticacao.getCurrentUser().getEmail();
-        final String idUsuario = Base64Custom.codificarBase64( emailUsuario );
-        final DatabaseReference usuarioRef = firebaseRef.child("historico").child( idUsuario );
-
-/*
-        usuarioRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Historico historico = dataSnapshot.getValue( Historico.class );
-
-                txtHistorico.setText("Data: "+historico.getData()
-                        +"\n"+ "Evolução: "+historico.getEvolucao());
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-*/
-
-
-      /*usuarioRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Historico historico= snapshot.getValue(Historico.class);
-                    txtHistorico.setText(historico.getData()
-                                        + "\n"
-                                        +historico.getEvolucao());
-
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
-    }
-
-/*
+   /*
     public  void gerarNotificacao(View view){
 
         addNotification();
